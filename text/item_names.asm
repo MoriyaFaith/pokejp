@@ -97,3 +97,4 @@ ItemNames:
 	db "11F@"
 	db "B4F@"
 	db "ICE STONE@"
+	db "DEVOLVESTONE@"

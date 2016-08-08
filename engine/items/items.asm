@@ -114,6 +114,7 @@ ItemUsePtrTable:
 	dw UnusableItem      ; FLOOR_11F
 	dw UnusableItem      ; FLOOR_B4F
 	dw ItemUseEvoStone   ; ICE_STONE
+	dw ItemUseEvoStone   ; DEVOLVE_STONE
 
 ItemUseBall:
 
@@ -777,9 +778,13 @@ ItemUseEvoStone:
 	ld a,[wWhichPokemon]
 	push af
 	ld a,[wcf91]
+	cp DEVOLVE_STONE
 	ld [wEvoStoneItemID],a
 	push af
+	ld a,DEVO_STONE_PARTY_MENU
+	jr z, .devolveMenu
 	ld a,EVO_STONE_PARTY_MENU
+.devolveMenu
 	ld [wPartyMenuTypeOrMessageID],a
 	ld a,$ff
 	ld [wUpdateSpritesEnabled],a
@@ -793,7 +798,14 @@ ItemUseEvoStone:
 	ld a,SFX_HEAL_AILMENT
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
+	ld a, [wPartyMenuTypeOrMessageID]
+	cp DEVO_STONE_PARTY_MENU
+	jr z, .devolvePokemon
 	callab TryEvolvingMon ; try to evolve pokemon
+	jr .doneEvolving
+.devolvePokemon
+	callab DevolvePokemon
+.doneEvolving
 	ld a,[wEvolutionOccurred]
 	and a
 	jr z,.noEffect
