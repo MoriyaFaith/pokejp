@@ -117,7 +117,7 @@ LoadSAV2:
 	call CopyData
 	ld hl, sMainData
 	ld de, wPokedexOwned
-	ld bc, wPokedexSeenEnd - wPokedexOwned
+	ld bc, wPokedexSeenEndOld - wPokedexOwned
 	call CopyData
 	and a
 	jp SAVGoodChecksum
@@ -260,7 +260,7 @@ SaveSAVtoSRAM2:
 	call CopyData
 	ld hl, wPokedexOwned ; pokédex only
 	ld de, sMainData
-	ld bc, wPokedexSeenEnd - wPokedexOwned
+	ld bc, wPokedexSeenEndOld - wPokedexOwned
 	call CopyData
 	ld hl, sPlayerName
 	ld bc, sMainDataCheckSum - sPlayerName

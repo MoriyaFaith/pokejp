@@ -484,6 +484,7 @@ UsableItems_PartyMenu:
 	db MAX_ETHER
 	db ELIXER
 	db MAX_ELIXER
+	db ICE_STONE
 	db $ff
 
 ; items which close the item menu when used

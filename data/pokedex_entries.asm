@@ -30,7 +30,7 @@ PokedexEntryPointers:
 	dw PinsirDexEntry
 	dw TangelaDexEntry
 	dw LeafeonDexEntry
-	dw MissingNoDexEntry
+	dw GlaceonDexEntry
 	dw GrowlitheDexEntry
 	dw OnixDexEntry
 	dw FearowDexEntry
@@ -410,6 +410,13 @@ LeafeonDexEntry:
 	db 3,3
 	dw 640
 	TX_FAR _LeafeonDexEntry
+	db "@"
+
+GlaceonDexEntry:
+	db "ICE@"
+	db 3,3
+	dw 640
+	TX_FAR _GlaceonDexEntry
 	db "@"
 
 GrowlitheDexEntry:

@@ -207,7 +207,11 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld [wd11e], a
 	xor a
 	ld [wMonDataLocation], a
+	ld a, [wcf91]
+	push af
 	call LearnMoveFromLevelUp
+	pop af
+	ld [wcf91], a
 	pop hl
 	predef SetPartyMonTypes
 	ld a, [wIsInBattle]
