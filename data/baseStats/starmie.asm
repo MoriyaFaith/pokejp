@@ -1,4 +1,4 @@
-db DEX_STARMIE ; pokedex id
+db STARMIE ; pokedex id
 db 60 ; base hp
 db 75 ; base attack
 db 85 ; base defense

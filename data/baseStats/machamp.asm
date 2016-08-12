@@ -1,4 +1,4 @@
-db DEX_MACHAMP ; pokedex id
+db MACHAMP ; pokedex id
 db 90 ; base hp
 db 130 ; base attack
 db 80 ; base defense

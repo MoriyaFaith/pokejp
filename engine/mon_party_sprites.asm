@@ -398,8 +398,6 @@ WriteMonPartySpriteOAM:
 
 GetPartyMonSpriteID:
 	ld [wd11e], a
-	predef IndexToPokedex
-	ld a, [wd11e]
 	ld c, a
 	dec a
 	srl a

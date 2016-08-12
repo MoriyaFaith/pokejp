@@ -1,4 +1,4 @@
-db DEX_VAPOREON ; pokedex id
+db VAPOREON ; pokedex id
 db 130 ; base hp
 db 65 ; base attack
 db 60 ; base defense
