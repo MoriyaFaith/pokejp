@@ -70,7 +70,7 @@ SetPal_StatusScreen:
 	ld bc, $10
 	call CopyData
 	ld a, [wcf91]
-	cp VICTREEBEL + 1
+	cp MEW + 1
 	jr c, .pokemon
 	ld a, $1 ; not pokemon
 .pokemon
