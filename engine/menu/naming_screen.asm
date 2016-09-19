@@ -11,6 +11,7 @@ AskName:
 	ld a, [wcf91]
 	ld [wd11e], a
 	call GetMonName
+if 0
 	ld hl, DoYouWantToNicknameText
 	call PrintText
 	coord hl, 14, 7
@@ -18,10 +19,11 @@ AskName:
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
+endc
 	pop hl
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .declinedNickname
+	jr .declinedNickname
 	ld a, [wUpdateSpritesEnabled]
 	push af
 	xor a

@@ -339,6 +339,54 @@ BoxSRAMPointerTable:
 	dw sBox5 ; sBox11
 	dw sBox6 ; sBox12
 
+IncBox::
+;	ld hl, WhenYouChangeBoxText
+;	call PrintText
+;	call YesNoChoice
+;	ld a, [wCurrentMenuItem]
+;	and a
+;	ret nz ; return if No was chosen
+	ld hl, wCurrentBoxNum
+	bit 7, [hl] ; is it the first time player is changing the box?
+	call z, EmptyAllSRAMBoxes ; if so, empty all boxes in SRAM
+;	call DisplayChangeBoxMenu
+;	call UpdateSprites
+;	ld hl, hFlags_0xFFF6
+;	set 1, [hl]
+;	call HandleMenuInput
+;	ld hl, hFlags_0xFFF6
+;	res 1, [hl]
+;	bit 1, a ; pressed b
+;	ret nz
+	call GetBoxSRAMLocation
+	ld e, l
+	ld d, h
+	ld hl, wBoxDataStart
+	call CopyBoxToOrFromSRAM ; copy old box from WRAM to SRAM
+;	ld a, [wCurrentMenuItem]
+	ld a, [wCurrentBoxNum]
+	inc a
+	set 7, a
+	ld [wCurrentBoxNum], a
+	call GetBoxSRAMLocation
+	ld de, wBoxDataStart
+	call CopyBoxToOrFromSRAM ; copy new box from SRAM to WRAM
+	ld hl, wMapTextPtr
+	ld de, wChangeBoxSavedMapTextPointer
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	call RestoreMapTextPointer
+	call SaveSAVtoSRAM
+	ld hl, wChangeBoxSavedMapTextPointer
+	call SetMapTextPointer
+;	ld a, SFX_SAVE
+;	call PlaySoundWaitForCurrent
+;	call WaitForSoundToFinish
+	ret
+
 ChangeBox::
 	ld hl, WhenYouChangeBoxText
 	call PrintText

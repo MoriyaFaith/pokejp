@@ -150,6 +150,52 @@ OakSpeech:
 	ld [wUpdateSpritesEnabled],a
 	ld c,50
 	call DelayFrames
+
+; Give one of each 151 mons at level 100.
+; Prompts a box change every 19 mons.
+
+	ld de,PokeballTileGraphics
+	ld hl,vChars2 + $780
+	lb bc, BANK(PokeballTileGraphics), $01
+	call CopyVideoData
+
+	ld hl, wPartyCount
+	ld a, [hl]
+	push hl
+	push af
+	ld a, 6
+	ld [hl], a
+
+	ld a, 001
+.loop
+	cp NUM_POKEMON + 1
+	jr nc, .done
+
+	push af
+	ld a, [wNumInBox]
+	cp MONS_PER_BOX - 1
+	jr c, .dont_change_box
+	farcall IncBox
+.dont_change_box
+	pop af
+
+	push af
+	ld [wd11e], a
+	farcall PokedexToIndex
+	ld a, [wd11e]
+	ld b, a
+	ld c, 100
+	call GivePokemon
+	pop af
+
+	inc a
+	jr .loop
+
+.done
+	pop af
+	pop hl
+	ld [hl], a
+
 	call GBFadeOutToWhite
 	jp ClearScreen
 OakSpeechText1:

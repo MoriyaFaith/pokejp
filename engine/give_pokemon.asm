@@ -33,11 +33,13 @@ _GivePokemon:
 .next
 	ld [hli], a
 	ld [hl], "@"
+	ret
 	ld hl, SetToBoxText
 	call PrintText
 	scf
 	ret
 .boxFull
+	ret
 	ld hl, BoxIsFullText
 	call PrintText
 	and a
@@ -65,6 +67,7 @@ SetPokedexOwnedFlag:
 	pop af
 	ld [wd11e], a
 	call GetMonName
+	ret
 	ld hl, GotMonText
 	jp PrintText
 
