@@ -27,6 +27,7 @@ StartMenu_Pokemon:
 	call GBPalWhiteOutWithDelay3
 	call RestoreScreenTilesAndReloadTilePatterns
 	call LoadGBPal
+	call ReloadMapData
 	jp RedisplayStartMenu
 .chosePokemon
 	call SaveScreenTilesToBuffer1
